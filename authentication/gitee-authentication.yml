@@ -1,0 +1,62 @@
+generated: '2026-07-12'
+method: probed
+source: live Swagger swagger_doc.json + Gitee OAuth documentation
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+schemes:
+- name: accessTokenQuery
+  type: apiKey
+  in: query
+  parameterName: access_token
+  description: >-
+    Personal access token supplied as the `access_token` query parameter. This
+    is the predominant auth style in the Gitee Open API v5 - it is present on
+    236 of 264 operations in the live Swagger definition. Create a token under
+    Gitee account Settings > Private tokens.
+  sources:
+  - https://gitee.com/api/v5/swagger_doc.json
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: >-
+    The same personal access token may be sent as an
+    `Authorization: Bearer <token>` request header instead of a query
+    parameter.
+  sources:
+  - https://gitee.com/api/v5/swagger
+- name: oauth2
+  type: oauth2
+  flow: authorizationCode
+  authorizationUrl: https://gitee.com/oauth/authorize
+  tokenUrl: https://gitee.com/oauth/token
+  refreshUrl: https://gitee.com/oauth/token
+  scopes:
+  - user_info
+  - projects
+  - pull_requests
+  - issues
+  - notes
+  - keys
+  - hook
+  - groups
+  - gists
+  - enterprises
+  - emails
+  description: >-
+    Gitee OAuth2 for third-party applications. Register an application to obtain
+    a client id and secret, direct users to the authorize endpoint, and exchange
+    the returned code at the token endpoint (refresh tokens are issued).
+    The authorize endpoint was confirmed live (HTTP 302) on 2026-07-12. The
+    scope list is drawn from Gitee's OAuth documentation; the Swagger definition
+    itself carries no securityDefinitions.
+  sources:
+  - https://gitee.com/api/v5/oauth_doc
+notes: >-
+  Unauthenticated requests are allowed for public reads at a reduced rate limit
+  (60 requests/minute, confirmed via live X-RateLimit-Limit response header).
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

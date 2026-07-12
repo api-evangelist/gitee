@@ -1,0 +1,91 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Gitee
+providerId: gitee
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Code Hosting
+- Git
+- DevOps
+- China
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Gitee spend. Gitee's personal tier and its free Enterprise
+  package carry no vendor invoice. Cost is incurred through paid Gitee
+  Enterprise Edition packages (Standard / Premium), which are billed per seat
+  per year in CNY - so the dominant cost driver is seat count times package
+  price, not API call volume. The Open API v5 has no per-call fee; it is
+  governed by rate limits rather than metered billing. Enterprise add-ons such
+  as Gitee Go (CI/CD) may carry their own usage-based charges.
+notes: >-
+  Per-seat list prices and package contents are denominated in CNY and change;
+  verify on the Gitee Enterprise pricing page. Gitee Go and other DevOps add-ons
+  can introduce usage-based charges (for example build minutes) separate from
+  seat licensing - reconcile those separately.
+sources:
+- https://gitee.com/enterprises/price
+- https://help.gitee.com/enterprise/billing/service-package
+- https://gitee.com/help/articles/4365
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Gitee (OSChina)
+serviceCategory: Developer Tools and DevOps
+billingModel:
+  pricingCategory: Subscription (Per Seat)
+  billingFrequency: Annual
+  billingCurrency: CNY
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Gitee Enterprise Edition
+  ServiceCategory: Developer Tools and DevOps
+  ProviderName: Gitee
+  PublisherName: OSChina
+  InvoiceIssuerName: Gitee (OSChina)
+  BillingCurrency: CNY
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: enterprise_seats
+  description: Paid Gitee Enterprise Edition seats, billed per user per year.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - enterprise
+  - package
+- name: gitee_go_minutes
+  description: Gitee Go CI/CD build minutes, where applicable, billed on usage.
+  unit: minutes
+  aggregation: sum
+  dimensions:
+  - enterprise
+- name: storage
+  description: Repository storage allowance consumed within an enterprise package.
+  unit: bytes
+  aggregation: max
+  dimensions:
+  - enterprise
+principles:
+- name: Visibility
+  description: Track paid enterprise seat counts and any Gitee Go usage per enterprise and package tier.
+- name: Allocation
+  description: Map enterprise members and repositories to internal teams so seat spend and storage attribute to cost centers.
+- name: Optimization
+  description: Right-size the enterprise package to actual active seats; use the free personal tier for individual or open-source work; pool CI usage.
+- name: Accountability
+  description: Assign an owner per enterprise account; review seat renewals and Gitee Go usage against budget annually.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

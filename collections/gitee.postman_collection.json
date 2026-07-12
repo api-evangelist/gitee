@@ -1,0 +1,266 @@
+{
+  "info": {
+    "name": "Gitee Open API v5 (core subset)",
+    "description": "A curated, representative subset of the Gitee (码云) Open API v5, the documented REST API of the China-based Git hosting and DevOps platform by OSChina / Shenzhen Oschina (开源中国). Grounded in the live Swagger at https://gitee.com/api/v5/swagger_doc.json (Gitee Open API 5.4.92). Base URL: https://gitee.com/api/v5. Authenticate with a personal access token as the access_token query parameter or an Authorization: Bearer header, or via OAuth2. The full 175-path / 264-operation spec is authoritative.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://gitee.com/api/v5", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" },
+    { "key": "owner", "value": "", "type": "string" },
+    { "key": "repo", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Repositories",
+      "item": [
+        {
+          "name": "List user repositories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/user/repos", "host": ["{{baseUrl}}"], "path": ["user", "repos"] },
+            "description": "List repositories the authenticated user owns or has access to."
+          }
+        },
+        {
+          "name": "Create user repository",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"my-repo\",\n  \"description\": \"Created via the Gitee API\",\n  \"private\": false\n}" },
+            "url": { "raw": "{{baseUrl}}/user/repos", "host": ["{{baseUrl}}"], "path": ["user", "repos"] },
+            "description": "Create a repository for the authenticated user."
+          }
+        },
+        {
+          "name": "Get a repository",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}"] },
+            "description": "Get a single repository."
+          }
+        },
+        {
+          "name": "List branches",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/branches", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "branches"] },
+            "description": "List all branches of a repository."
+          }
+        },
+        {
+          "name": "List commits",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/commits", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "commits"] },
+            "description": "List a repository's commits."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Issues",
+      "item": [
+        {
+          "name": "List repository issues",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/issues?state=open", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "issues"], "query": [{ "key": "state", "value": "open" }] },
+            "description": "List all issues of a repository."
+          }
+        },
+        {
+          "name": "Create issue",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"repo\": \"{{repo}}\",\n  \"title\": \"Something is broken\",\n  \"body\": \"Steps to reproduce...\"\n}" },
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/issues", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "issues"] },
+            "description": "Create an issue (issues belong to an owner and are assigned to a repo)."
+          }
+        },
+        {
+          "name": "Create issue comment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"body\": \"Thanks for the report.\"\n}" },
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/issues/:number/comments", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "issues", ":number", "comments"], "variable": [{ "key": "number", "value": "" }] },
+            "description": "Create a comment on an issue."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pull Requests",
+      "item": [
+        {
+          "name": "List pull requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/pulls?state=open", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "pulls"], "query": [{ "key": "state", "value": "open" }] },
+            "description": "List pull requests."
+          }
+        },
+        {
+          "name": "Create pull request",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Add feature\",\n  \"head\": \"feature-branch\",\n  \"base\": \"master\",\n  \"body\": \"Description of the change\"\n}" },
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/pulls", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "pulls"] },
+            "description": "Create a pull request."
+          }
+        },
+        {
+          "name": "Merge pull request",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merge_method\": \"merge\"\n}" },
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/pulls/:number/merge", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "pulls", ":number", "merge"], "variable": [{ "key": "number", "value": "" }] },
+            "description": "Merge a pull request."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users and Organizations",
+      "item": [
+        {
+          "name": "Get authenticated user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/user", "host": ["{{baseUrl}}"], "path": ["user"] },
+            "description": "Get the authenticated user's profile."
+          }
+        },
+        {
+          "name": "List user SSH keys",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/user/keys", "host": ["{{baseUrl}}"], "path": ["user", "keys"] },
+            "description": "List the authenticated user's SSH public keys."
+          }
+        },
+        {
+          "name": "List user organizations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/user/orgs", "host": ["{{baseUrl}}"], "path": ["user", "orgs"] },
+            "description": "List organizations the authenticated user belongs to."
+          }
+        },
+        {
+          "name": "List organization members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/orgs/:org/members", "host": ["{{baseUrl}}"], "path": ["orgs", ":org", "members"], "variable": [{ "key": "org", "value": "" }] },
+            "description": "List all members of an organization."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Gists",
+      "item": [
+        {
+          "name": "List gists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/gists", "host": ["{{baseUrl}}"], "path": ["gists"] },
+            "description": "List the authenticated user's gists (code snippets)."
+          }
+        },
+        {
+          "name": "Create gist",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"files\": {\n    \"hello.txt\": { \"content\": \"Hello Gitee\" }\n  },\n  \"description\": \"A snippet\",\n  \"public\": true\n}" },
+            "url": { "raw": "{{baseUrl}}/gists", "host": ["{{baseUrl}}"], "path": ["gists"] },
+            "description": "Create a gist (code snippet)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enterprises",
+      "item": [
+        {
+          "name": "List user enterprises",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/user/enterprises", "host": ["{{baseUrl}}"], "path": ["user", "enterprises"] },
+            "description": "List enterprises the authenticated user belongs to."
+          }
+        },
+        {
+          "name": "List enterprise members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/enterprises/:enterprise/members", "host": ["{{baseUrl}}"], "path": ["enterprises", ":enterprise", "members"], "variable": [{ "key": "enterprise", "value": "" }] },
+            "description": "List all members of an enterprise."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "List repository webhooks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/hooks", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "hooks"] },
+            "description": "List a repository's WebHooks."
+          }
+        },
+        {
+          "name": "Create repository webhook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"url\": \"https://example.com/webhook\",\n  \"push_events\": true,\n  \"issues_events\": true,\n  \"merge_requests_events\": true\n}" },
+            "url": { "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}/hooks", "host": ["{{baseUrl}}"], "path": ["repos", "{{owner}}", "{{repo}}", "hooks"] },
+            "description": "Create a repository WebHook that Gitee posts events to over outbound HTTP."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search repositories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/search/repositories?q=devops", "host": ["{{baseUrl}}"], "path": ["search", "repositories"], "query": [{ "key": "q", "value": "devops" }] },
+            "description": "Search repositories."
+          }
+        }
+      ]
+    }
+  ]
+}

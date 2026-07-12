@@ -1,0 +1,128 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Gitee
+providerId: gitee
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Code Hosting
+- Git
+- DevOps
+- China
+- Plans
+description: >-
+  Gitee offers a free personal tier and paid Enterprise editions. The free
+  personal tier provides public and private code hosting, pull requests, issue
+  tracking, and access to the Open API v5. Gitee Enterprise Edition (企业版) is a
+  paid DevOps platform sold per seat per year, with Free, Standard (标准版), and
+  Premium (尊享版) enterprise packages; paid enterprise packages start at roughly
+  299 CNY per user per year with a minimum seat count and volume discounts. The
+  Open API v5 itself carries no separate fee - it is governed by rate limits
+  (see rate-limits/gitee-rate-limits.yml). Exact list prices and package
+  contents are not reconciled here.
+notes: >-
+  Pricing is denominated in CNY and oriented to the China market. Enterprise
+  package contents, seat minimums, storage allowances, and promotions change;
+  verify on the Gitee Enterprise pricing page during reconciliation. First-time
+  enterprise paid purchases (except the basic package) have historically
+  included a one-month free trial.
+sources:
+- https://gitee.com/enterprises/price
+- https://gitee.com/enterprises
+- https://help.gitee.com/enterprise/billing/service-package
+- https://gitee.com/api/v5/swagger
+plans:
+- id: gitee-personal-free
+  name: Personal (Free)
+  type: free
+  description: >-
+    Free personal accounts with public and private repositories, pull requests,
+    issue tracking, gists, organizations, and full access to the Open API v5
+    (subject to rate limits). Suitable for individual developers and small
+    open-source projects.
+  entries:
+  - label: Personal Hosting
+    name: personal_hosting
+    type: flat
+    metric: account
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  elements:
+  - name: Public and Private Repositories
+  - name: Pull Requests
+  - name: Issue Tracking
+  - name: Gists
+  - name: Open API v5 Access
+- id: gitee-enterprise-free
+  name: Enterprise - Free (企业版 免费版)
+  type: free
+  description: >-
+    Free enterprise package providing basic project management and code hosting
+    for startups and small teams.
+  entries:
+  - label: Enterprise Free Seat
+    name: enterprise_free_seat
+    type: flat
+    metric: seat
+    limit: -1
+    timeFrame: year
+    geo: CN
+    unit: 1
+    price: free (basic package)
+    userMultiplied: true
+  elements:
+  - name: Basic Project Management
+  - name: Code Hosting
+- id: gitee-enterprise-standard
+  name: Enterprise - Standard (企业版 标准版)
+  type: paid
+  description: >-
+    Paid enterprise DevOps package billed per seat per year, with larger
+    repository storage and standard collaboration and management features.
+    Minimum seat count applies.
+  entries:
+  - label: Standard Seat
+    name: enterprise_standard_seat
+    type: subscription
+    metric: seat
+    limit: -1
+    timeFrame: year
+    geo: CN
+    unit: 1
+    price: from ~299 CNY per user per year (min seats apply; volume discounts)
+    userMultiplied: true
+  elements:
+  - name: Expanded Repository Storage
+  - name: Project Collaboration
+  - name: Member Management
+- id: gitee-enterprise-premium
+  name: Enterprise - Premium (企业版 尊享版)
+  type: paid
+  description: >-
+    Higher-tier enterprise package with advanced DevOps, security, and
+    management capabilities. Priced per seat per year above the Standard
+    package.
+  entries:
+  - label: Premium Seat
+    name: enterprise_premium_seat
+    type: subscription
+    metric: seat
+    limit: -1
+    timeFrame: year
+    geo: CN
+    unit: 1
+    price: contact sales (above Standard)
+    userMultiplied: true
+  elements:
+  - name: Advanced DevOps
+  - name: Advanced Security and Controls
+  - name: Priority Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

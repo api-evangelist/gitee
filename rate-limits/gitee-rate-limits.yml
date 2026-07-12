@@ -1,0 +1,56 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Gitee
+providerId: gitee
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Code Hosting
+- Git
+- DevOps
+- Rate Limiting
+- Quotas
+description: >-
+  The Gitee Open API v5 enforces per-window request rate limits and returns
+  X-RateLimit-* response headers. On 2026-07-12 an unauthenticated request to
+  GET https://gitee.com/api/v5/repos/oschina/git-osc returned
+  X-RateLimit-Limit: 60 with a decrementing X-RateLimit-Remaining, confirming a
+  60-requests-per-minute cap for unauthenticated (public) access. Authenticated
+  requests (personal access token or OAuth2) receive a higher allowance.
+  Exceeding the limit yields HTTP 403/429 responses. Some write-heavy or
+  search endpoints may apply additional per-endpoint constraints.
+notes: >-
+  The exact authenticated per-minute limit is not published as a fixed public
+  figure and is not reconciled here; the 60/min unauthenticated figure was
+  observed live from response headers. Always read the X-RateLimit-Limit and
+  X-RateLimit-Remaining headers at runtime and back off when Remaining
+  approaches zero.
+sources:
+- https://gitee.com/api/v5/swagger
+- https://gitee.com/repos/oschina/git-osc
+responseCodes:
+  throttled: 403
+  throttledAlt: 429
+limits:
+- name: Unauthenticated Requests
+  scope: ip
+  metric: requests
+  limit: 60
+  timeFrame: minute
+  notes: Confirmed live via X-RateLimit-Limit 60 header on an unauthenticated GET.
+- name: Authenticated Requests
+  scope: token
+  metric: requests
+  limit: higher (not published as a fixed figure)
+  timeFrame: minute
+  notes: Personal access token or OAuth2 requests receive a larger allowance than unauthenticated access.
+policies:
+- name: Rate Limit Headers
+  description: Responses include X-RateLimit-Limit and X-RateLimit-Remaining. Read them to pace requests.
+- name: Backoff Strategy
+  description: On 403/429 throttling, implement exponential backoff with jitter and retry after the window resets.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

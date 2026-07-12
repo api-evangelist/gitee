@@ -1,0 +1,134 @@
+aid: gitee
+name: Gitee
+review:
+  question: Does Gitee expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Gitee's documented public API surface is
+    the Open API v5, a request/response REST API over HTTPS at
+    https://gitee.com/api/v5. Its event mechanism is repository WebHooks -
+    Gitee makes outbound HTTP POST callbacks to a URL you configure - which is
+    server-to-endpoint HTTP, not a server-push transport on Gitee's own API. No
+    WebSocket (ws:// or wss://) and no Server-Sent Events (SSE) endpoint is
+    documented, so there is no in-scope server-push transport to model.
+findings:
+  summary: |
+    Gitee (码云) does not publish a documented public WebSocket API. Gitee is a
+    China-based Git hosting and DevOps platform operated by OSChina / Shenzhen
+    Oschina (开源中国). Its documented public API is the Open API v5, a REST API
+    over HTTPS with base URL https://gitee.com/api/v5 and a live Swagger 2.0
+    definition at https://gitee.com/api/v5/swagger (machine-readable JSON at
+    https://gitee.com/api/v5/swagger_doc.json, observed as Gitee Open API
+    version 5.4.92 on the review date). The spec declares 175 paths and 264
+    operations across Repositories, Pull Requests, Issues, Users,
+    Organizations, Gists, Enterprises, Webhooks, Labels, Milestones, Activity,
+    Git Data, Checks, Search, and Miscellaneous. Requests authenticate with a
+    personal access token supplied as an `access_token` query parameter
+    (present on 236 of 264 operations) or an `Authorization: Bearer <token>`
+    header, or via OAuth2. Real-time event delivery is provided by repository
+    WebHooks (outbound HTTP callbacks), not by a WebSocket. No realtime,
+    bidirectional, or streaming WebSocket endpoint is documented.
+  liveVerification: |
+    On 2026-07-12 the reviewer confirmed the API is live and unauthenticated
+    public reads work: GET https://gitee.com/api/v5/repos/oschina/git-osc
+    returned HTTP 200 with real repository JSON, and the response carried
+    X-RateLimit-Limit: 60 and X-RateLimit-Remaining headers, confirming the
+    documented 60-requests-per-minute unauthenticated rate limit. GET
+    https://gitee.com/api/v5/emojis also returned HTTP 200. The OAuth2
+    authorize endpoint https://gitee.com/oauth/authorize returned HTTP 302
+    (present).
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://gitee.com/api/v5
+      documented: true
+      note: Gitee Open API v5. Swagger 2.0 at /api/v5/swagger, JSON at /api/v5/swagger_doc.json.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Repository WebHooks POST events to a configured HTTP endpoint. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Gitee Open API v5 as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events endpoint is documented on the Gitee Open API.
+  endpointsConfirmedRest:
+    - GET    https://gitee.com/api/v5/repos/{owner}/{repo}
+    - GET    https://gitee.com/api/v5/repos/{owner}/{repo}/branches
+    - GET    https://gitee.com/api/v5/repos/{owner}/{repo}/commits
+    - GET    https://gitee.com/api/v5/user/repos
+    - POST   https://gitee.com/api/v5/user/repos
+    - GET    https://gitee.com/api/v5/repos/{owner}/{repo}/issues
+    - POST   https://gitee.com/api/v5/repos/{owner}/issues
+    - POST   https://gitee.com/api/v5/repos/{owner}/{repo}/issues/{number}/comments
+    - GET    https://gitee.com/api/v5/repos/{owner}/{repo}/pulls
+    - POST   https://gitee.com/api/v5/repos/{owner}/{repo}/pulls
+    - PUT    https://gitee.com/api/v5/repos/{owner}/{repo}/pulls/{number}/merge
+    - GET    https://gitee.com/api/v5/user
+    - GET    https://gitee.com/api/v5/user/keys
+    - GET    https://gitee.com/api/v5/user/orgs
+    - GET    https://gitee.com/api/v5/orgs/{org}/members
+    - GET    https://gitee.com/api/v5/gists
+    - POST   https://gitee.com/api/v5/gists
+    - GET    https://gitee.com/api/v5/user/enterprises
+    - GET    https://gitee.com/api/v5/enterprises/{enterprise}/members
+    - GET    https://gitee.com/api/v5/repos/{owner}/{repo}/hooks
+    - POST   https://gitee.com/api/v5/repos/{owner}/{repo}/hooks
+    - GET    https://gitee.com/api/v5/search/repositories
+    - GET    https://gitee.com/api/v5/emojis
+  confirmedVsModeled: |
+    CONFIRMED (live): the base host and REST behavior, the /repos/{owner}/{repo}
+    read, /emojis, the 60/min unauthenticated rate limit (from live response
+    headers), and the OAuth2 authorize endpoint (HTTP 302). CONFIRMED (from the
+    live Swagger swagger_doc.json): the full 264-operation surface, path shapes,
+    HTTP methods, and the access_token query parameter on 236 operations. The
+    curated OpenAPI in openapi/gitee-openapi.yml is a representative SUBSET
+    (about 30 operations) hand-authored from that source with English summaries
+    translated from the Chinese originals; the authoritative complete spec is
+    Gitee's own swagger_doc.json. MODELED: OAuth2 scope list and grant details
+    in the OpenAPI security scheme are drawn from Gitee's OAuth documentation
+    (scopes user_info, projects, pull_requests, issues, notes, keys, hook,
+    groups, gists, enterprises, emails) rather than the Swagger, which carries
+    no securityDefinitions. Plans, rate-limits, and finops artifacts are
+    reconciled:false.
+  authentication: |
+    Personal access token as the `access_token` query parameter, or as an
+    `Authorization: Bearer <token>` header; alternatively OAuth2 (authorization
+    code, with refresh tokens). Unauthenticated access is permitted for public
+    reads at a lower rate limit.
+  platformNote: |
+    Gitee is operated from mainland China (gitee.com). Public-facing sites in
+    China are ICP-registered, and content/availability may differ by region.
+    Consumers outside China should expect Chinese-language documentation and
+    responses and should account for cross-border latency and data-residency
+    considerations.
+sources:
+  - url: https://gitee.com/api/v5/swagger
+    type: APIReference
+    note: Live Swagger UI for the Gitee Open API v5.
+  - url: https://gitee.com/api/v5/swagger_doc.json
+    type: OpenAPI
+    note: Machine-readable Swagger 2.0 definition (Gitee Open API 5.4.92); host gitee.com, basePath /api, paths under /v5. Authoritative.
+  - url: https://gitee.com/api/v5/oauth_doc
+    type: Documentation
+    note: Gitee OAuth2 documentation (authorize/token endpoints and scopes).
+  - url: https://gitee.com/repos/oschina/git-osc
+    type: Documentation
+    note: Live GET /api/v5/repos/oschina/git-osc returned HTTP 200 with X-RateLimit-Limit 60.
+  - url: https://gitee.com/enterprises/price
+    type: Pricing
+    note: Gitee Enterprise Edition pricing (free plus paid Standard/Premium tiers).
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Gitee's own public API is
+    request/response REST (Open API v5) plus outbound repository WebHooks. No
+    AsyncAPI document was created because there is no server-push transport
+    (WebSocket or SSE) on Gitee's own API to model.

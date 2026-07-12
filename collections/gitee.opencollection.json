@@ -1,0 +1,277 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset)",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Repositories", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List user repositories.", "type": "http" },
+          "http": { "method": "GET", "url": "https://gitee.com/api/v5/user/repos" },
+          "docs": "List repositories the authenticated user owns or has access to."
+        },
+        {
+          "info": { "name": "Create user repository.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/user/repos",
+            "body": { "type": "json", "data": "{\n  \"name\": \"my-repo\",\n  \"private\": false\n}" }
+          },
+          "docs": "Create a repository for the authenticated user."
+        },
+        {
+          "info": { "name": "Get a repository.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." }
+            ]
+          },
+          "docs": "Get a single repository."
+        },
+        {
+          "info": { "name": "List branches.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/branches",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." }
+            ]
+          },
+          "docs": "List all branches of a repository."
+        },
+        {
+          "info": { "name": "List commits.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/commits",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." }
+            ]
+          },
+          "docs": "List a repository's commits."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Issues", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List repository issues.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/issues?state=open",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." },
+              { "name": "state", "value": "open", "type": "query", "description": "Issue state filter." }
+            ]
+          },
+          "docs": "List all issues of a repository."
+        },
+        {
+          "info": { "name": "Create issue.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/issues",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"repo\": \"\",\n  \"title\": \"Something is broken\"\n}" }
+          },
+          "docs": "Create an issue (issues belong to an owner and are assigned to a repo)."
+        },
+        {
+          "info": { "name": "Create issue comment.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/issues/:number/comments",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." },
+              { "name": "number", "value": "", "type": "path", "description": "The issue number." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"body\": \"Thanks for the report.\"\n}" }
+          },
+          "docs": "Create a comment on an issue."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Pull Requests", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List pull requests.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls?state=open",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." },
+              { "name": "state", "value": "open", "type": "query", "description": "Pull request state filter." }
+            ]
+          },
+          "docs": "List pull requests."
+        },
+        {
+          "info": { "name": "Create pull request.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"title\": \"Add feature\",\n  \"head\": \"feature-branch\",\n  \"base\": \"master\"\n}" }
+          },
+          "docs": "Create a pull request."
+        },
+        {
+          "info": { "name": "Merge pull request.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls/:number/merge",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." },
+              { "name": "number", "value": "", "type": "path", "description": "The pull request number." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"merge_method\": \"merge\"\n}" }
+          },
+          "docs": "Merge a pull request."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Users and Organizations", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get authenticated user.", "type": "http" },
+          "http": { "method": "GET", "url": "https://gitee.com/api/v5/user" },
+          "docs": "Get the authenticated user's profile."
+        },
+        {
+          "info": { "name": "List user SSH keys.", "type": "http" },
+          "http": { "method": "GET", "url": "https://gitee.com/api/v5/user/keys" },
+          "docs": "List the authenticated user's SSH public keys."
+        },
+        {
+          "info": { "name": "List user organizations.", "type": "http" },
+          "http": { "method": "GET", "url": "https://gitee.com/api/v5/user/orgs" },
+          "docs": "List organizations the authenticated user belongs to."
+        },
+        {
+          "info": { "name": "List organization members.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/orgs/:org/members",
+            "params": [
+              { "name": "org", "value": "", "type": "path", "description": "The organization path." }
+            ]
+          },
+          "docs": "List all members of an organization."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Gists", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List gists.", "type": "http" },
+          "http": { "method": "GET", "url": "https://gitee.com/api/v5/gists" },
+          "docs": "List the authenticated user's gists (code snippets)."
+        },
+        {
+          "info": { "name": "Create gist.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/gists",
+            "body": { "type": "json", "data": "{\n  \"files\": { \"hello.txt\": { \"content\": \"Hello Gitee\" } },\n  \"public\": true\n}" }
+          },
+          "docs": "Create a gist (code snippet)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Enterprises", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List user enterprises.", "type": "http" },
+          "http": { "method": "GET", "url": "https://gitee.com/api/v5/user/enterprises" },
+          "docs": "List enterprises the authenticated user belongs to."
+        },
+        {
+          "info": { "name": "List enterprise members.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/enterprises/:enterprise/members",
+            "params": [
+              { "name": "enterprise", "value": "", "type": "path", "description": "The enterprise path." }
+            ]
+          },
+          "docs": "List all members of an enterprise."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List repository webhooks.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/hooks",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." }
+            ]
+          },
+          "docs": "List a repository's WebHooks."
+        },
+        {
+          "info": { "name": "Create repository webhook.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/hooks",
+            "params": [
+              { "name": "owner", "value": "", "type": "path", "description": "The repository owner." },
+              { "name": "repo", "value": "", "type": "path", "description": "The repository path." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"url\": \"https://example.com/webhook\",\n  \"push_events\": true\n}" }
+          },
+          "docs": "Create a repository WebHook that Gitee posts events to over outbound HTTP."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Search", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Search repositories.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/search/repositories?q=devops",
+            "params": [
+              { "name": "q", "value": "devops", "type": "query", "description": "Search keyword." }
+            ]
+          },
+          "docs": "Search repositories."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
