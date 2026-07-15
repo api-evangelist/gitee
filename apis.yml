@@ -187,6 +187,8 @@ apis:
     send a test delivery. These are server-to-endpoint HTTP callbacks, not a
     WebSocket API.
 common:
+- type: AgenticAccess
+  url: agentic-access/gitee-agentic-access.yml
 - type: DomainSecurity
   url: security/gitee-domain-security.yml
 - type: Authentication
