@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: Gitee Open API v5 (core subset) Enterprises Gists API
+  description: 'A curated, representative subset of the Gitee (码云) Open API v5, the documented REST API of the China-based Git hosting and DevOps platform operated by OSChina / Shenzhen Oschina (开源中国). Every path in this document is grounded in Gitee''s live Swagger definition at https://gitee.com/api/v5/swagger_doc.json (Gitee Open API version 5.4.92 as observed on 2026-07-12); the authoritative, complete machine-readable spec (175 paths / 264 operations across Repositories, Issues, Pull Requests, Users, Organizations, Gists, Enterprises, Webhooks, Labels, Milestones, Activity, Git Data, Search, and more) lives there. This subset captures the core representative operations per resource group. Requests authenticate with a personal access token supplied either as an `access_token` query parameter or an `Authorization: Bearer <token>` header, or via OAuth2. English endpoint summaries below are translated from the Chinese summaries in the source spec.'
+  version: 5.4.92
+  contact:
+    name: Gitee
+    url: https://gitee.com
+servers:
+- url: https://gitee.com/api/v5
+  description: Gitee Open API v5 (production)
+security:
+- accessTokenQuery: []
+- bearerAuth: []
+- oauth2:
+  - projects
+tags:
+- name: Gists
+  description: Code snippets (gists) and their comments.
+paths:
+  /gists:
+    get:
+      operationId: listGists
+      tags:
+      - Gists
+      summary: List the authenticated user's gists (code snippets)
+      responses:
+        '200':
+          description: A list of gists.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gist'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createGist
+      tags:
+      - Gists
+      summary: Create a gist (code snippet)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - files
+              properties:
+                files:
+                  type: object
+                  additionalProperties: true
+                  description: Map of filename to { content }.
+                description:
+                  type: string
+                public:
+                  type: boolean
+      responses:
+        '201':
+          description: The created gist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gist'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /gists/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The gist ID.
+    get:
+      operationId: getGist
+      tags:
+      - Gists
+      summary: Get a single gist
+      responses:
+        '200':
+          description: The requested gist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gist'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteGist
+      tags:
+      - Gists
+      summary: Delete a gist
+      responses:
+        '204':
+          description: The gist was deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+    Gist:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        public:
+          type: boolean
+        html_url:
+          type: string
+        files:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    accessTokenQuery:
+      type: apiKey
+      in: query
+      name: access_token
+      description: Personal access token passed as the `access_token` query parameter. Present on the large majority of Gitee v5 operations.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access token passed as `Authorization: Bearer <token>`.'
+    oauth2:
+      type: oauth2
+      description: Gitee OAuth2. Authorize at https://gitee.com/oauth/authorize and exchange for a token at https://gitee.com/oauth/token.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://gitee.com/oauth/authorize
+          tokenUrl: https://gitee.com/oauth/token
+          refreshUrl: https://gitee.com/oauth/token
+          scopes:
+            user_info: Read the user's profile.
+            projects: Read and manage repositories.
+            pull_requests: Read and manage pull requests.
+            issues: Read and manage issues.
+            notes: Read and manage comments.
+            keys: Read and manage SSH keys.
+            hook: Read and manage webhooks.
+            groups: Read and manage organizations.
+            gists: Read and manage gists.
+            enterprises: Read and manage enterprises.
+            emails: Read the user's email addresses.

@@ -1,0 +1,319 @@
+openapi: 3.0.3
+info:
+  title: Gitee Open API v5 (core subset) Enterprises Issues API
+  description: 'A curated, representative subset of the Gitee (码云) Open API v5, the documented REST API of the China-based Git hosting and DevOps platform operated by OSChina / Shenzhen Oschina (开源中国). Every path in this document is grounded in Gitee''s live Swagger definition at https://gitee.com/api/v5/swagger_doc.json (Gitee Open API version 5.4.92 as observed on 2026-07-12); the authoritative, complete machine-readable spec (175 paths / 264 operations across Repositories, Issues, Pull Requests, Users, Organizations, Gists, Enterprises, Webhooks, Labels, Milestones, Activity, Git Data, Search, and more) lives there. This subset captures the core representative operations per resource group. Requests authenticate with a personal access token supplied either as an `access_token` query parameter or an `Authorization: Bearer <token>` header, or via OAuth2. English endpoint summaries below are translated from the Chinese summaries in the source spec.'
+  version: 5.4.92
+  contact:
+    name: Gitee
+    url: https://gitee.com
+servers:
+- url: https://gitee.com/api/v5
+  description: Gitee Open API v5 (production)
+security:
+- accessTokenQuery: []
+- bearerAuth: []
+- oauth2:
+  - projects
+tags:
+- name: Issues
+  description: Issue tracking - issues, comments, labels, milestones.
+paths:
+  /repos/{owner}/{repo}/issues:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    get:
+      operationId: listRepoIssues
+      tags:
+      - Issues
+      summary: List all issues of a repository
+      parameters:
+      - name: state
+        in: query
+        schema:
+          type: string
+          enum:
+          - open
+          - progressing
+          - closed
+          - rejected
+          - all
+          default: open
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: A list of issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+  /repos/{owner}/issues:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    post:
+      operationId: createIssue
+      tags:
+      - Issues
+      summary: Create an issue (issues belong to an owner, assigned to a repo)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - repo
+              - title
+              properties:
+                repo:
+                  type: string
+                  description: Repository path.
+                title:
+                  type: string
+                body:
+                  type: string
+      responses:
+        '201':
+          description: The created issue.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /repos/{owner}/issues/{number}:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - name: number
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The issue number.
+    patch:
+      operationId: updateIssue
+      tags:
+      - Issues
+      summary: Update an issue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                repo:
+                  type: string
+                title:
+                  type: string
+                state:
+                  type: string
+                  enum:
+                  - open
+                  - progressing
+                  - closed
+                  - rejected
+                body:
+                  type: string
+      responses:
+        '200':
+          description: The updated issue.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /repos/{owner}/{repo}/issues/{number}/comments:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    - name: number
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The issue number.
+    get:
+      operationId: listIssueComments
+      tags:
+      - Issues
+      summary: List all comments on an issue
+      responses:
+        '200':
+          description: A list of issue comments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+    post:
+      operationId: createIssueComment
+      tags:
+      - Issues
+      summary: Create a comment on an issue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - body
+              properties:
+                body:
+                  type: string
+      responses:
+        '201':
+          description: The created comment.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /repos/{owner}/{repo}/labels:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    get:
+      operationId: listRepoLabels
+      tags:
+      - Issues
+      summary: List all task labels in a repository
+      responses:
+        '200':
+          description: A list of labels.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+  /repos/{owner}/{repo}/milestones:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    get:
+      operationId: listMilestones
+      tags:
+      - Issues
+      summary: List all milestones in a repository
+      responses:
+        '200':
+          description: A list of milestones.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        html_url:
+          type: string
+        avatar_url:
+          type: string
+        type:
+          type: string
+    Issue:
+      type: object
+      properties:
+        id:
+          type: integer
+        number:
+          type: string
+        title:
+          type: string
+        state:
+          type: string
+        body:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+  parameters:
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
+      schema:
+        type: string
+    Repo:
+      name: repo
+      in: path
+      required: true
+      description: The repository path.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    accessTokenQuery:
+      type: apiKey
+      in: query
+      name: access_token
+      description: Personal access token passed as the `access_token` query parameter. Present on the large majority of Gitee v5 operations.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access token passed as `Authorization: Bearer <token>`.'
+    oauth2:
+      type: oauth2
+      description: Gitee OAuth2. Authorize at https://gitee.com/oauth/authorize and exchange for a token at https://gitee.com/oauth/token.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://gitee.com/oauth/authorize
+          tokenUrl: https://gitee.com/oauth/token
+          refreshUrl: https://gitee.com/oauth/token
+          scopes:
+            user_info: Read the user's profile.
+            projects: Read and manage repositories.
+            pull_requests: Read and manage pull requests.
+            issues: Read and manage issues.
+            notes: Read and manage comments.
+            keys: Read and manage SSH keys.
+            hook: Read and manage webhooks.
+            groups: Read and manage organizations.
+            gists: Read and manage gists.
+            enterprises: Read and manage enterprises.
+            emails: Read the user's email addresses.

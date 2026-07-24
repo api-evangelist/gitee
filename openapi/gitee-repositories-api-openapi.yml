@@ -1,0 +1,342 @@
+openapi: 3.0.3
+info:
+  title: Gitee Open API v5 (core subset) Enterprises Repositories API
+  description: 'A curated, representative subset of the Gitee (码云) Open API v5, the documented REST API of the China-based Git hosting and DevOps platform operated by OSChina / Shenzhen Oschina (开源中国). Every path in this document is grounded in Gitee''s live Swagger definition at https://gitee.com/api/v5/swagger_doc.json (Gitee Open API version 5.4.92 as observed on 2026-07-12); the authoritative, complete machine-readable spec (175 paths / 264 operations across Repositories, Issues, Pull Requests, Users, Organizations, Gists, Enterprises, Webhooks, Labels, Milestones, Activity, Git Data, Search, and more) lives there. This subset captures the core representative operations per resource group. Requests authenticate with a personal access token supplied either as an `access_token` query parameter or an `Authorization: Bearer <token>` header, or via OAuth2. English endpoint summaries below are translated from the Chinese summaries in the source spec.'
+  version: 5.4.92
+  contact:
+    name: Gitee
+    url: https://gitee.com
+servers:
+- url: https://gitee.com/api/v5
+  description: Gitee Open API v5 (production)
+security:
+- accessTokenQuery: []
+- bearerAuth: []
+- oauth2:
+  - projects
+tags:
+- name: Repositories
+  description: Repositories and their contents - branches, tags, commits, contents, forks.
+paths:
+  /user/repos:
+    get:
+      operationId: listUserRepos
+      tags:
+      - Repositories
+      summary: List repositories the authenticated user owns or has access to
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: A list of repositories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Repository'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createUserRepo
+      tags:
+      - Repositories
+      summary: Create a repository for the authenticated user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryInput'
+      responses:
+        '201':
+          description: The created repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Repository'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /repos/{owner}/{repo}:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    get:
+      operationId: getRepo
+      tags:
+      - Repositories
+      summary: Get a single repository
+      responses:
+        '200':
+          description: The requested repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Repository'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateRepo
+      tags:
+      - Repositories
+      summary: Update repository settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryInput'
+      responses:
+        '200':
+          description: The updated repository.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Repository'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /repos/{owner}/{repo}/branches:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    get:
+      operationId: listBranches
+      tags:
+      - Repositories
+      summary: List all branches
+      responses:
+        '200':
+          description: A list of branches.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Branch'
+    post:
+      operationId: createBranch
+      tags:
+      - Repositories
+      summary: Create a branch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - refs
+              - branch_name
+              properties:
+                refs:
+                  type: string
+                  description: Source branch or ref.
+                branch_name:
+                  type: string
+                  description: New branch name.
+      responses:
+        '201':
+          description: The created branch.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /repos/{owner}/{repo}/tags:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    get:
+      operationId: listTags
+      tags:
+      - Repositories
+      summary: List all tags of a repository
+      responses:
+        '200':
+          description: A list of tags.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+  /repos/{owner}/{repo}/commits:
+    parameters:
+    - $ref: '#/components/parameters/Owner'
+    - $ref: '#/components/parameters/Repo'
+    get:
+      operationId: listCommits
+      tags:
+      - Repositories
+      summary: List a repository's commits
+      parameters:
+      - name: sha
+        in: query
+        schema:
+          type: string
+        description: Branch
+        tag: null
+        or SHA to start from.: null
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: A list of commits.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+components:
+  schemas:
+    Repository:
+      type: object
+      properties:
+        id:
+          type: integer
+        full_name:
+          type: string
+        human_name:
+          type: string
+        path:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        description:
+          type: string
+        private:
+          type: boolean
+        html_url:
+          type: string
+        stargazers_count:
+          type: integer
+        forks_count:
+          type: integer
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        html_url:
+          type: string
+        avatar_url:
+          type: string
+        type:
+          type: string
+    Branch:
+      type: object
+      properties:
+        name:
+          type: string
+        protected:
+          type: boolean
+        commit:
+          type: object
+          additionalProperties: true
+    RepositoryInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        private:
+          type: boolean
+        has_issues:
+          type: boolean
+        has_wiki:
+          type: boolean
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
+      schema:
+        type: string
+    Repo:
+      name: repo
+      in: path
+      required: true
+      description: The repository path.
+      schema:
+        type: string
+  securitySchemes:
+    accessTokenQuery:
+      type: apiKey
+      in: query
+      name: access_token
+      description: Personal access token passed as the `access_token` query parameter. Present on the large majority of Gitee v5 operations.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Personal access token passed as `Authorization: Bearer <token>`.'
+    oauth2:
+      type: oauth2
+      description: Gitee OAuth2. Authorize at https://gitee.com/oauth/authorize and exchange for a token at https://gitee.com/oauth/token.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://gitee.com/oauth/authorize
+          tokenUrl: https://gitee.com/oauth/token
+          refreshUrl: https://gitee.com/oauth/token
+          scopes:
+            user_info: Read the user's profile.
+            projects: Read and manage repositories.
+            pull_requests: Read and manage pull requests.
+            issues: Read and manage issues.
+            notes: Read and manage comments.
+            keys: Read and manage SSH keys.
+            hook: Read and manage webhooks.
+            groups: Read and manage organizations.
+            gists: Read and manage gists.
+            enterprises: Read and manage enterprises.
+            emails: Read the user's email addresses.
