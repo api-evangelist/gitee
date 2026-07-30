@@ -13,7 +13,20 @@ description: >-
   Requests authenticate with a personal access token (access_token query
   parameter or Authorization header) or via OAuth2. Gitee offers a free
   personal tier plus paid Enterprise editions.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/gitee.png
 tags:
 - Code Hosting
 - Git
@@ -29,163 +42,168 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: gitee:gitee-repositories-api
-  name: Gitee Repositories API
-  tags:
-  - Repositories
-  - Code Hosting
-  - Git
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://gitee.com/api/v5/swagger
-  baseURL: https://gitee.com/api/v5
-  properties:
-  - url: https://gitee.com/api/v5/swagger
-    type: Documentation
-  - url: https://gitee.com/api/v5/swagger
-    type: APIReference
-  - url: openapi/gitee-openapi.yml
-    type: OpenAPI
-  - url: collections/gitee.postman_collection.json
-    type: PostmanCollection
-  - url: collections/gitee.opencollection.json
-    type: OpenCollection
-  description: >-
-    Create and manage repositories and their contents - branches, tags,
-    commits, contents, forks, collaborators, branch protection, and file blobs
-    and trees. The largest surface of the Gitee v5 API.
-- aid: gitee:gitee-issues-api
-  name: Gitee Issues API
-  tags:
-  - Issues
-  - Issue Tracking
-  - Labels
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://gitee.com/api/v5/swagger
-  baseURL: https://gitee.com/api/v5
-  properties:
-  - url: https://gitee.com/api/v5/swagger
-    type: Documentation
-  - url: openapi/gitee-openapi.yml
-    type: OpenAPI
-  - url: collections/gitee.postman_collection.json
-    type: PostmanCollection
-  - url: collections/gitee.opencollection.json
-    type: OpenCollection
-  description: >-
-    Track work with issues - list, create, and update issues for a repository or
-    organization, manage issue comments, labels, and milestones, and inspect the
-    pull requests linked to an issue.
-- aid: gitee:gitee-pull-requests-api
-  name: Gitee Pull Requests API
-  tags:
-  - Pull Requests
-  - Code Review
-  - Merge
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://gitee.com/api/v5/swagger
-  baseURL: https://gitee.com/api/v5
-  properties:
-  - url: https://gitee.com/api/v5/swagger
-    type: Documentation
-  - url: openapi/gitee-openapi.yml
-    type: OpenAPI
-  - url: collections/gitee.postman_collection.json
-    type: PostmanCollection
-  - url: collections/gitee.opencollection.json
-    type: OpenCollection
-  description: >-
-    Propose and review code changes - list, create, and update pull requests,
-    read their commits and changed files, check merge status, merge or test a
-    pull request, and assign reviewers and testers.
-- aid: gitee:gitee-users-orgs-api
-  name: Gitee Users and Organizations API
-  tags:
-  - Users
-  - Organizations
-  - Members
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://gitee.com/api/v5/swagger
-  baseURL: https://gitee.com/api/v5
-  properties:
-  - url: https://gitee.com/api/v5/swagger
-    type: Documentation
-  - url: openapi/gitee-openapi.yml
-    type: OpenAPI
-  - url: collections/gitee.postman_collection.json
-    type: PostmanCollection
-  - url: collections/gitee.opencollection.json
-    type: OpenCollection
-  description: >-
-    Read and manage the authenticated user's profile, SSH public keys,
-    namespaces, followers and following, plus organizations and their members
-    and membership.
-- aid: gitee:gitee-gists-api
-  name: Gitee Gists API
-  tags:
-  - Gists
-  - Snippets
-  - Code Sharing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://gitee.com/api/v5/swagger
-  baseURL: https://gitee.com/api/v5
-  properties:
-  - url: https://gitee.com/api/v5/swagger
-    type: Documentation
-  - url: openapi/gitee-openapi.yml
-    type: OpenAPI
-  - url: collections/gitee.postman_collection.json
-    type: PostmanCollection
-  - url: collections/gitee.opencollection.json
-    type: OpenCollection
-  description: >-
-    Manage code snippets (gists) - list, create, read, update, and delete
-    gists, star and unstar them, browse their commit history, and manage gist
-    comments.
 - aid: gitee:gitee-enterprises-api
   name: Gitee Enterprises API
+  description: Gitee Enterprise Edition - enterprises, members, weekly reports.
+  humanURL: https://gitee.com/api/v5/swagger
+  baseURL: https://gitee.com/api/v5
   tags:
   - Enterprises
-  - DevOps
-  - Teams
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/gitee-enterprises-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
+- aid: gitee:gitee-gists-api
+  name: Gitee Gists API
+  description: Code snippets (gists) and their comments.
   humanURL: https://gitee.com/api/v5/swagger
   baseURL: https://gitee.com/api/v5
+  tags:
+  - Gists
   properties:
-  - url: https://gitee.com/api/v5/swagger
-    type: Documentation
-  - url: openapi/gitee-openapi.yml
-    type: OpenAPI
-  - url: collections/gitee.postman_collection.json
-    type: PostmanCollection
-  - url: collections/gitee.opencollection.json
-    type: OpenCollection
-  description: >-
-    Enterprise DevOps surface for Gitee Enterprise Edition - list the
-    authenticated user's enterprises, read an enterprise, manage enterprise
-    members and invitations, and work with weekly reports and their comments.
+  - type: OpenAPI
+    url: openapi/gitee-gists-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
+- aid: gitee:gitee-issues-api
+  name: Gitee Issues API
+  description: Issue tracking - issues, comments, labels, milestones.
+  humanURL: https://gitee.com/api/v5/swagger
+  baseURL: https://gitee.com/api/v5
+  tags:
+  - Issues
+  properties:
+  - type: OpenAPI
+    url: openapi/gitee-issues-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
+- aid: gitee:gitee-organizations-api
+  name: Gitee Organizations API
+  description: Organizations and their members.
+  humanURL: https://gitee.com/api/v5/swagger
+  baseURL: https://gitee.com/api/v5
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/gitee-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
+- aid: gitee:gitee-pull-requests-api
+  name: Gitee Pull Requests API
+  description: Pull requests - create, review, merge, and inspect changes.
+  humanURL: https://gitee.com/api/v5/swagger
+  baseURL: https://gitee.com/api/v5
+  tags:
+  - Pull Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/gitee-pull-requests-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
+- aid: gitee:gitee-repositories-api
+  name: Gitee Repositories API
+  description: Repositories and their contents - branches, tags, commits, contents, forks.
+  humanURL: https://gitee.com/api/v5/swagger
+  baseURL: https://gitee.com/api/v5
+  tags:
+  - Repositories
+  properties:
+  - type: OpenAPI
+    url: openapi/gitee-repositories-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
+- aid: gitee:gitee-search-api
+  name: Gitee Search API
+  description: Search across repositories, issues, and users.
+  humanURL: https://gitee.com/api/v5/swagger
+  baseURL: https://gitee.com/api/v5
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/gitee-search-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
+- aid: gitee:gitee-users-api
+  name: Gitee Users API
+  description: The authenticated user, keys, followers, and following.
+  humanURL: https://gitee.com/api/v5/swagger
+  baseURL: https://gitee.com/api/v5
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/gitee-users-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
 - aid: gitee:gitee-webhooks-api
   name: Gitee Webhooks API
-  tags:
-  - Webhooks
-  - Events
-  - Automation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Repository WebHooks (outbound HTTP event callbacks).
   humanURL: https://gitee.com/api/v5/swagger
   baseURL: https://gitee.com/api/v5
+  tags:
+  - Webhooks
   properties:
-  - url: https://gitee.com/api/v5/swagger
-    type: Documentation
-  - url: openapi/gitee-openapi.yml
-    type: OpenAPI
-  - url: collections/gitee.postman_collection.json
-    type: PostmanCollection
-  - url: collections/gitee.opencollection.json
-    type: OpenCollection
-  description: >-
-    Configure repository WebHooks that Gitee posts events to over outbound
-    HTTP - list, create, read, update, and delete a repository's webhooks and
-    send a test delivery. These are server-to-endpoint HTTP callbacks, not a
-    WebSocket API.
+  - type: OpenAPI
+    url: openapi/gitee-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://gitee.com/api/v5/swagger
+  - type: APIReference
+    url: https://gitee.com/api/v5/swagger
+  - type: PostmanCollection
+    url: collections/gitee.postman_collection.json
+  - type: OpenCollection
+    url: collections/gitee.opencollection.json
 common:
 - type: AgenticAccess
   url: agentic-access/gitee-agentic-access.yml
