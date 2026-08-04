@@ -1,0 +1,30 @@
+{
+  "provider": "gitee",
+  "sources": [
+    "gitee-enterprises-api-openapi.yml",
+    "gitee-gists-api-openapi.yml",
+    "gitee-issues-api-openapi.yml",
+    "gitee-organizations-api-openapi.yml",
+    "gitee-pull-requests-api-openapi.yml",
+    "gitee-repositories-api-openapi.yml",
+    "gitee-search-api-openapi.yml",
+    "gitee-users-api-openapi.yml",
+    "gitee-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "gitee-enterprises-api-openapi.yml",
+    "gitee-gists-api-openapi.yml",
+    "gitee-issues-api-openapi.yml",
+    "gitee-organizations-api-openapi.yml",
+    "gitee-pull-requests-api-openapi.yml",
+    "gitee-repositories-api-openapi.yml",
+    "gitee-search-api-openapi.yml",
+    "gitee-users-api-openapi.yml",
+    "gitee-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
