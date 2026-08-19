@@ -40,7 +40,7 @@ tags:
 - China
 created: '2026-07-12'
 modified: '2026-07-12'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: gitee:gitee-enterprises-api
   name: Gitee Enterprises API
