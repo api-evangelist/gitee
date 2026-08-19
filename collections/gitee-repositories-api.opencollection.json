@@ -1,0 +1,238 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset) Enterprises Repositories API",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Repositories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List repositories the authenticated user owns or has access to",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/user/repos",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List repositories the authenticated user owns or has access to"
+        },
+        {
+          "info": {
+            "name": "Create a repository for the authenticated user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/user/repos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a repository for the authenticated user"
+        },
+        {
+          "info": {
+            "name": "Get a single repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ]
+          },
+          "docs": "Get a single repository"
+        },
+        {
+          "info": {
+            "name": "Update repository settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update repository settings"
+        },
+        {
+          "info": {
+            "name": "List all branches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/branches",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ]
+          },
+          "docs": "List all branches"
+        },
+        {
+          "info": {
+            "name": "Create a branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/branches",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a branch"
+        },
+        {
+          "info": {
+            "name": "List all tags of a repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/tags",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ]
+          },
+          "docs": "List all tags of a repository"
+        },
+        {
+          "info": {
+            "name": "List a repository's commits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/commits",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "sha",
+                "value": "",
+                "type": "query",
+                "description": "Branch"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List a repository's commits"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

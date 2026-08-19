@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset) Enterprises Pull Requests API",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pull Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pull requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List pull requests"
+        },
+        {
+          "info": {
+            "name": "Create a pull request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a pull request"
+        },
+        {
+          "info": {
+            "name": "Get a single pull request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls/:number",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "The pull request number."
+              }
+            ]
+          },
+          "docs": "Get a single pull request"
+        },
+        {
+          "info": {
+            "name": "Check whether a pull request has been merged",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls/:number/merge",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "The pull request number."
+              }
+            ]
+          },
+          "docs": "Check whether a pull request has been merged"
+        },
+        {
+          "info": {
+            "name": "Merge a pull request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls/:number/merge",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "The pull request number."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merge a pull request"
+        },
+        {
+          "info": {
+            "name": "List the changed files of a pull request (up to 300 diffs)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/pulls/:number/files",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "The pull request number."
+              }
+            ]
+          },
+          "docs": "List the changed files of a pull request (up to 300 diffs)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

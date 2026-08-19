@@ -1,0 +1,322 @@
+{
+  "item": [
+    {
+      "id": "9482f68b-cfa9-4289-8f9c-7f50712514ef",
+      "name": "Search",
+      "description": {
+        "content": "Search across repositories, issues, and users.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac8956ec-a46c-4da1-8602-37fcd41871b9",
+          "name": "Search repositories",
+          "request": {
+            "name": "Search repositories",
+            "description": {},
+            "url": {
+              "path": [
+                "search",
+                "repositories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search keyword."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01bc9b37-9481-40ad-9072-423f0a8755c8",
+              "name": "Matching repositories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1872,\n    \"full_name\": \"string\",\n    \"human_name\": \"string\",\n    \"path\": \"string\",\n    \"name\": \"string\",\n    \"owner\": {\n      \"id\": 5117,\n      \"login\": \"string\",\n      \"name\": \"string\",\n      \"html_url\": \"string\",\n      \"avatar_url\": \"string\",\n      \"type\": \"string\"\n    },\n    \"description\": \"string\",\n    \"private\": true,\n    \"html_url\": \"string\",\n    \"stargazers_count\": 9694,\n    \"forks_count\": 5007\n  },\n  {\n    \"id\": 5499,\n    \"full_name\": \"string\",\n    \"human_name\": \"string\",\n    \"path\": \"string\",\n    \"name\": \"string\",\n    \"owner\": {\n      \"id\": 9841,\n      \"login\": \"string\",\n      \"name\": \"string\",\n      \"html_url\": \"string\",\n      \"avatar_url\": \"string\",\n      \"type\": \"string\"\n    },\n    \"description\": \"string\",\n    \"private\": true,\n    \"html_url\": \"string\",\n    \"stargazers_count\": 7339,\n    \"forks_count\": 4882\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba18c72d-9c42-4586-83a1-a41de88e1e4d",
+          "name": "Search issues",
+          "request": {
+            "name": "Search issues",
+            "description": {},
+            "url": {
+              "path": [
+                "search",
+                "issues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search keyword."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c130605-61e5-4a36-8694-0819b6cff8e5",
+              "name": "Matching issues.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "issues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 4818,\n    \"number\": \"string\",\n    \"title\": \"string\",\n    \"state\": \"string\",\n    \"body\": \"string\",\n    \"user\": {\n      \"id\": 1042,\n      \"login\": \"string\",\n      \"name\": \"string\",\n      \"html_url\": \"string\",\n      \"avatar_url\": \"string\",\n      \"type\": \"string\"\n    },\n    \"created_at\": \"1963-12-19T03:06:49.621Z\"\n  },\n  {\n    \"id\": 5160,\n    \"number\": \"string\",\n    \"title\": \"string\",\n    \"state\": \"string\",\n    \"body\": \"string\",\n    \"user\": {\n      \"id\": 5631,\n      \"login\": \"string\",\n      \"name\": \"string\",\n      \"html_url\": \"string\",\n      \"avatar_url\": \"string\",\n      \"type\": \"string\"\n    },\n    \"created_at\": \"2013-02-27T07:46:15.464Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30d9b8e1-2918-4d4e-b5b1-6694a5ebf106",
+          "name": "Search users",
+          "request": {
+            "name": "Search users",
+            "description": {},
+            "url": {
+              "path": [
+                "search",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search keyword."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cc56ece-f8e9-4a1f-8e70-2ab9153264f0",
+              "name": "Matching users.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 7150,\n    \"login\": \"string\",\n    \"name\": \"string\",\n    \"html_url\": \"string\",\n    \"avatar_url\": \"string\",\n    \"type\": \"string\"\n  },\n  {\n    \"id\": 5724,\n    \"login\": \"string\",\n    \"name\": \"string\",\n    \"html_url\": \"string\",\n    \"avatar_url\": \"string\",\n    \"type\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gitee.com/api/v5",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2f7d44fe-e5d0-4ee6-973d-c8b66c8e0461",
+    "name": "Gitee Open API v5 (core subset) Enterprises Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A curated, representative subset of the Gitee (码云) Open API v5, the documented REST API of the China-based Git hosting and DevOps platform operated by OSChina / Shenzhen Oschina (开源中国). Every path in this document is grounded in Gitee's live Swagger definition at https://gitee.com/api/v5/swagger_doc.json (Gitee Open API version 5.4.92 as observed on 2026-07-12); the authoritative, complete machine-readable spec (175 paths / 264 operations across Repositories, Issues, Pull Requests, Users, Organizations, Gists, Enterprises, Webhooks, Labels, Milestones, Activity, Git Data, Search, and more) lives there. This subset captures the core representative operations per resource group. Requests authenticate with a personal access token supplied either as an `access_token` query parameter or an `Authorization: Bearer <token>` header, or via OAuth2. English endpoint summaries below are translated from the Chinese summaries in the source spec.\n\nContact Support:\n Name: Gitee",
+      "type": "text/plain"
+    }
+  }
+}

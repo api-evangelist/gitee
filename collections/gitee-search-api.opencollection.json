@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset) Enterprises Search API",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/search/repositories",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search keyword."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search repositories"
+        },
+        {
+          "info": {
+            "name": "Search issues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/search/issues",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search keyword."
+              }
+            ]
+          },
+          "docs": "Search issues"
+        },
+        {
+          "info": {
+            "name": "Search users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/search/users",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search keyword."
+              }
+            ]
+          },
+          "docs": "Search users"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

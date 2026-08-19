@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset) Enterprises API",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Enterprises",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List enterprises the authenticated user belongs to",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/user/enterprises"
+          },
+          "docs": "List enterprises the authenticated user belongs to"
+        },
+        {
+          "info": {
+            "name": "Get a single enterprise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/enterprises/:enterprise",
+            "params": [
+              {
+                "name": "enterprise",
+                "value": "",
+                "type": "path",
+                "description": "The enterprise path."
+              }
+            ]
+          },
+          "docs": "Get a single enterprise"
+        },
+        {
+          "info": {
+            "name": "List all members of an enterprise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/enterprises/:enterprise/members",
+            "params": [
+              {
+                "name": "enterprise",
+                "value": "",
+                "type": "path",
+                "description": "The enterprise path."
+              }
+            ]
+          },
+          "docs": "List all members of an enterprise"
+        },
+        {
+          "info": {
+            "name": "Add or invite an enterprise member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/enterprises/:enterprise/members",
+            "params": [
+              {
+                "name": "enterprise",
+                "value": "",
+                "type": "path",
+                "description": "The enterprise path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or invite an enterprise member"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

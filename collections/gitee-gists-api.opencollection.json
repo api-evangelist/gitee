@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset) Enterprises Gists API",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Gists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the authenticated user's gists (code snippets)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/gists"
+          },
+          "docs": "List the authenticated user's gists (code snippets)"
+        },
+        {
+          "info": {
+            "name": "Create a gist (code snippet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/gists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a gist (code snippet)"
+        },
+        {
+          "info": {
+            "name": "Get a single gist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/gists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The gist ID."
+              }
+            ]
+          },
+          "docs": "Get a single gist"
+        },
+        {
+          "info": {
+            "name": "Delete a gist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gitee.com/api/v5/gists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The gist ID."
+              }
+            ]
+          },
+          "docs": "Delete a gist"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

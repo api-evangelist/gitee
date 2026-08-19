@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset) Enterprises Webhooks API",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List a repository's WebHooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/hooks",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ]
+          },
+          "docs": "List a repository's WebHooks"
+        },
+        {
+          "info": {
+            "name": "Create a repository WebHook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/hooks",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a repository WebHook"
+        },
+        {
+          "info": {
+            "name": "Send a test delivery for a WebHook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/hooks/:id/tests",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The webhook ID."
+              }
+            ]
+          },
+          "docs": "Send a test delivery for a WebHook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

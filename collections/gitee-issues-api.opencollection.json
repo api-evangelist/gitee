@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gitee Open API v5 (core subset) Enterprises Issues API",
+    "version": "5.4.92"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all issues of a repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/issues",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all issues of a repository"
+        },
+        {
+          "info": {
+            "name": "Create an issue (issues belong to an owner, assigned to a repo)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/issues",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an issue (issues belong to an owner, assigned to a repo)"
+        },
+        {
+          "info": {
+            "name": "Update an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gitee.com/api/v5/repos/:owner/issues/:number",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "The issue number."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an issue"
+        },
+        {
+          "info": {
+            "name": "List all comments on an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/issues/:number/comments",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "The issue number."
+              }
+            ]
+          },
+          "docs": "List all comments on an issue"
+        },
+        {
+          "info": {
+            "name": "Create a comment on an issue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/issues/:number/comments",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              },
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "The issue number."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a comment on an issue"
+        },
+        {
+          "info": {
+            "name": "List all task labels in a repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/labels",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ]
+          },
+          "docs": "List all task labels in a repository"
+        },
+        {
+          "info": {
+            "name": "List all milestones in a repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gitee.com/api/v5/repos/:owner/:repo/milestones",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "The repository owner (user or organization path)."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The repository path."
+              }
+            ]
+          },
+          "docs": "List all milestones in a repository"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
