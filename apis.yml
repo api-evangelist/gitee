@@ -36,6 +36,17 @@ tags:
 - Pull Requests
 - Issue Tracking
 - DevOps
+- Open-Source
+- China
+tags_raw:
+- Code Hosting
+- Git
+- Git Hosting
+- Version Control
+- Repositories
+- Pull Requests
+- Issue Tracking
+- DevOps
 - Open Source
 - China
 created: '2026-07-12'
@@ -102,6 +113,8 @@ apis:
   humanURL: https://gitee.com/api/v5/swagger
   baseURL: https://gitee.com/api/v5
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -174,6 +187,8 @@ apis:
   humanURL: https://gitee.com/api/v5/swagger
   baseURL: https://gitee.com/api/v5
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -192,6 +207,8 @@ apis:
   humanURL: https://gitee.com/api/v5/swagger
   baseURL: https://gitee.com/api/v5
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
