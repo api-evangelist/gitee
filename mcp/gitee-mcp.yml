@@ -1,0 +1,69 @@
+generated: '2026-09-11'
+method: probed
+source: https://api.gitee.com/mcp
+status: published
+server:
+  name: gitee
+  transport: http
+  url: https://api.gitee.com/mcp
+deployment:
+  mode: remote
+  endpoint: https://api.gitee.com/mcp
+  verified: probed
+  probe: live
+  checked: '2026-09-11'
+  source: docs-check 2026-09-11 (endpoint found in the provider's own documentation, then probed)
+tools_count: 25
+tools:
+- name: compare_branches_tags
+  description: ''
+- name: create_comment
+  description: ''
+- name: create_issue
+  description: ''
+- name: create_pull
+  description: ''
+- name: create_release
+  description: ''
+- name: create_repo
+  description: ''
+- name: fork_repository
+  description: ''
+- name: get_diff_files
+  description: ''
+- name: get_file_content
+  description: ''
+- name: get_pull_detail
+  description: ''
+- name: get_repo_issue_detail
+  description: ''
+- name: get_user_info
+  description: ''
+- name: list_comments
+  description: ''
+- name: list_releases
+  description: ''
+- name: list_repo_issues
+  description: ''
+- name: list_repo_pulls
+  description: ''
+- name: list_user_notifications
+  description: ''
+- name: list_user_repos
+  description: ''
+- name: manage_pull_review
+  description: ''
+- name: merge_pull
+  description: ''
+- name: search_files_by_content
+  description: ''
+- name: search_open_source_repositories
+  description: ''
+- name: search_users
+  description: ''
+- name: update_issue
+  description: ''
+- name: update_pull
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
+authorship: provider
