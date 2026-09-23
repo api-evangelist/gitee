@@ -1,15 +1,7 @@
 {
   "provider": "gitee",
   "sources": [
-    "gitee-enterprises-api-openapi.yml",
-    "gitee-gists-api-openapi.yml",
-    "gitee-issues-api-openapi.yml",
-    "gitee-organizations-api-openapi.yml",
-    "gitee-pull-requests-api-openapi.yml",
-    "gitee-repositories-api-openapi.yml",
-    "gitee-search-api-openapi.yml",
-    "gitee-users-api-openapi.yml",
-    "gitee-webhooks-api-openapi.yml"
+    "_original/gitee-openapi.yml"
   ],
   "outputs": [
     "gitee-enterprises-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "gitee-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "gitee-enterprises-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-gists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-issues-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-pull-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-repositories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gitee-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
