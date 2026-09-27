@@ -186,6 +186,21 @@ paths:
                   type: object
                   additionalProperties: true
 components:
+  parameters:
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
+      schema:
+        type: string
+    Repo:
+      name: repo
+      in: path
+      required: true
+      description: The repository path.
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Missing or invalid access token.
@@ -199,21 +214,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Repo:
-      name: repo
-      in: path
-      required: true
-      description: The repository path.
-      schema:
-        type: string
-    Owner:
-      name: owner
-      in: path
-      required: true
-      description: The repository owner (user or organization path).
-      schema:
-        type: string
   schemas:
     PullRequest:
       type: object

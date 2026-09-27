@@ -72,6 +72,25 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    SshKey:
+      allOf:
+      - $ref: '#/components/schemas/SshKeyInput'
+      - type: object
+        properties:
+          id:
+            type: integer
+          created_at:
+            type: string
+            format: date-time
+    SshKeyInput:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+        title:
+          type: string
     User:
       type: object
       properties:
@@ -87,25 +106,6 @@ components:
           type: string
         type:
           type: string
-    SshKeyInput:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-        title:
-          type: string
-    SshKey:
-      allOf:
-      - $ref: '#/components/schemas/SshKeyInput'
-      - type: object
-        properties:
-          id:
-            type: integer
-          created_at:
-            type: string
-            format: date-time
     Error:
       type: object
       properties:

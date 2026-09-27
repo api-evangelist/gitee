@@ -211,7 +211,47 @@ paths:
                   type: object
                   additionalProperties: true
 components:
+  parameters:
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
+      schema:
+        type: string
+    Repo:
+      name: repo
+      in: path
+      required: true
+      description: The repository path.
+      schema:
+        type: string
   schemas:
+    Branch:
+      type: object
+      properties:
+        name:
+          type: string
+        protected:
+          type: boolean
+        commit:
+          type: object
+          additionalProperties: true
+    RepositoryInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        private:
+          type: boolean
+        has_issues:
+          type: boolean
+        has_wiki:
+          type: boolean
     User:
       type: object
       properties:
@@ -227,16 +267,6 @@ components:
           type: string
         type:
           type: string
-    Branch:
-      type: object
-      properties:
-        name:
-          type: string
-        protected:
-          type: boolean
-        commit:
-          type: object
-          additionalProperties: true
     Repository:
       type: object
       properties:
@@ -262,21 +292,6 @@ components:
           type: integer
         forks_count:
           type: integer
-    RepositoryInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        private:
-          type: boolean
-        has_issues:
-          type: boolean
-        has_wiki:
-          type: boolean
     Error:
       type: object
       properties:
@@ -295,21 +310,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Repo:
-      name: repo
-      in: path
-      required: true
-      description: The repository path.
-      schema:
-        type: string
-    Owner:
-      name: owner
-      in: path
-      required: true
-      description: The repository owner (user or organization path).
-      schema:
-        type: string
   securitySchemes:
     accessTokenQuery:
       type: apiKey

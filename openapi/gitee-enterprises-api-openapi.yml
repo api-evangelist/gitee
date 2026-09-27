@@ -107,14 +107,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
