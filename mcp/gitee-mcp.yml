@@ -16,54 +16,56 @@ deployment:
 tools_count: 25
 tools:
 - name: compare_branches_tags
-  description: ''
+  description: Compare two branches, tags, or commits in a repository
 - name: create_comment
-  description: ''
+  description: Create a comment on an issue or pull request
 - name: create_issue
-  description: ''
+  description: Create an issue
 - name: create_pull
-  description: ''
+  description: Create a pull request
 - name: create_release
-  description: ''
+  description: Create a release
 - name: create_repo
-  description: ''
+  description: Create a repository (user, org, or enterprise)
 - name: fork_repository
-  description: ''
+  description: Fork a repository
 - name: get_diff_files
-  description: ''
+  description: Get a pull request diff files
 - name: get_file_content
-  description: ''
+  description: Get the content of the specified file in the repository
 - name: get_pull_detail
-  description: ''
+  description: Get a pull request detail
 - name: get_repo_issue_detail
-  description: ''
+  description: Get the detail of an issue
 - name: get_user_info
-  description: ''
+  description: This is a tool from the gitee MCP server. Get information about the authenticated user
 - name: list_comments
-  description: ''
+  description: List all comments for an issue or pull request
 - name: list_releases
-  description: ''
+  description: List repository releases
 - name: list_repo_issues
-  description: ''
+  description: List all issues in a repository
 - name: list_repo_pulls
-  description: ''
+  description: List repository pulls
 - name: list_user_notifications
-  description: ''
+  description: List all notifications for authorized user
 - name: list_user_repos
-  description: ''
+  description: List user authorized repositories
 - name: manage_pull_review
-  description: ''
+  description: Manage a pull request review (approve or cancel)
 - name: merge_pull
-  description: ''
+  description: Merge a pull request
 - name: search_files_by_content
-  description: ''
+  description: Search files by content in a repository
 - name: search_open_source_repositories
-  description: ''
+  description: Search open source repositories on Gitee
 - name: search_users
-  description: ''
+  description: Search users on Gitee
 - name: update_issue
-  description: ''
+  description: Update an issue
 - name: update_pull
-  description: ''
+  description: Update a pull request
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
