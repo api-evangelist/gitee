@@ -211,22 +211,12 @@ paths:
                   type: object
                   additionalProperties: true
 components:
-  parameters:
-    Owner:
-      name: owner
-      in: path
-      required: true
-      description: The repository owner (user or organization path).
-      schema:
-        type: string
-    Repo:
-      name: repo
-      in: path
-      required: true
-      description: The repository path.
-      schema:
-        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
     Branch:
       type: object
       properties:
@@ -252,21 +242,6 @@ components:
           type: boolean
         has_wiki:
           type: boolean
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-        login:
-          type: string
-        name:
-          type: string
-        html_url:
-          type: string
-        avatar_url:
-          type: string
-        type:
-          type: string
     Repository:
       type: object
       properties:
@@ -292,11 +267,36 @@ components:
           type: integer
         forks_count:
           type: integer
-    Error:
+    User:
       type: object
       properties:
-        message:
+        id:
+          type: integer
+        login:
           type: string
+        name:
+          type: string
+        html_url:
+          type: string
+        avatar_url:
+          type: string
+        type:
+          type: string
+  parameters:
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
+      schema:
+        type: string
+    Repo:
+      name: repo
+      in: path
+      required: true
+      description: The repository path.
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Missing or invalid access token.

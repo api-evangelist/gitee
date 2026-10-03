@@ -80,20 +80,23 @@ paths:
                 items:
                   $ref: '#/components/schemas/User'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
     User:
       type: object
       properties:
@@ -109,22 +112,19 @@ components:
           type: string
         type:
           type: string
-    Organization:
-      type: object
-      properties:
-        id:
-          type: integer
-        login:
-          type: string
-        name:
-          type: string
-        url:
-          type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessTokenQuery:
       type: apiKey

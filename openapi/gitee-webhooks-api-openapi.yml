@@ -77,32 +77,12 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    Owner:
-      name: owner
-      in: path
-      required: true
-      description: The repository owner (user or organization path).
-      schema:
-        type: string
-    Repo:
-      name: repo
-      in: path
-      required: true
-      description: The repository path.
-      schema:
-        type: string
   schemas:
-    Webhook:
-      allOf:
-      - $ref: '#/components/schemas/WebhookInput'
-      - type: object
-        properties:
-          id:
-            type: integer
-          created_at:
-            type: string
-            format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
     WebhookInput:
       type: object
       required:
@@ -119,11 +99,16 @@ components:
           type: boolean
         merge_requests_events:
           type: boolean
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
+    Webhook:
+      allOf:
+      - $ref: '#/components/schemas/WebhookInput'
+      - type: object
+        properties:
+          id:
+            type: integer
+          created_at:
+            type: string
+            format: date-time
   responses:
     Unauthorized:
       description: Missing or invalid access token.
@@ -131,6 +116,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
+      schema:
+        type: string
+    Repo:
+      name: repo
+      in: path
+      required: true
+      description: The repository path.
+      schema:
+        type: string
   securitySchemes:
     accessTokenQuery:
       type: apiKey

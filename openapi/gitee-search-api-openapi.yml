@@ -97,6 +97,24 @@ paths:
                   $ref: '#/components/schemas/User'
 components:
   schemas:
+    Issue:
+      type: object
+      properties:
+        id:
+          type: integer
+        number:
+          type: string
+        title:
+          type: string
+        state:
+          type: string
+        body:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
     Repository:
       type: object
       properties:
@@ -137,24 +155,6 @@ components:
           type: string
         type:
           type: string
-    Issue:
-      type: object
-      properties:
-        id:
-          type: integer
-        number:
-          type: string
-        title:
-          type: string
-        state:
-          type: string
-        body:
-          type: string
-        user:
-          $ref: '#/components/schemas/User'
-        created_at:
-          type: string
-          format: date-time
   securitySchemes:
     accessTokenQuery:
       type: apiKey

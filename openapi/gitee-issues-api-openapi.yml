@@ -226,44 +226,7 @@ paths:
                   type: object
                   additionalProperties: true
 components:
-  parameters:
-    Owner:
-      name: owner
-      in: path
-      required: true
-      description: The repository owner (user or organization path).
-      schema:
-        type: string
-    Repo:
-      name: repo
-      in: path
-      required: true
-      description: The repository path.
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-        login:
-          type: string
-        name:
-          type: string
-        html_url:
-          type: string
-        avatar_url:
-          type: string
-        type:
-          type: string
     Issue:
       type: object
       properties:
@@ -287,6 +250,43 @@ components:
       properties:
         message:
           type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        html_url:
+          type: string
+        avatar_url:
+          type: string
+        type:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
+      schema:
+        type: string
+    Repo:
+      name: repo
+      in: path
+      required: true
+      description: The repository path.
+      schema:
+        type: string
   securitySchemes:
     accessTokenQuery:
       type: apiKey

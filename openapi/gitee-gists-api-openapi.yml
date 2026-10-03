@@ -113,6 +113,11 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
     Gist:
       type: object
       properties:
@@ -130,11 +135,6 @@ components:
         created_at:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
   securitySchemes:
     accessTokenQuery:
       type: apiKey
