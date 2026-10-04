@@ -235,6 +235,9 @@ apis:
   - type: OpenCollection
     url: collections/gitee.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/gitee-capability-edges.yml
+  name: Gitee Business Capability Map
 - type: AgenticAccess
   url: agentic-access/gitee-agentic-access.yml
 - type: DomainSecurity

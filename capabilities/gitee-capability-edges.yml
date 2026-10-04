@@ -1,0 +1,58 @@
+slug: gitee
+provider: Gitee
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Pull Requests
+  spec_file: gitee-pull-requests-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.88
+  evidence: POST /repos/{owner}/{repo}/pulls createPullRequest 'Create a pull request'; PUT .../merge
+    mergePullRequest 'Merge a pull request'; 'List the changed files of a pull request (up to 300 diffs)'
+  reason: Pull request creation, review of changed diffs and merge is exactly source-control and code-review
+    practice, i.e. Software Construction Management.
+- tag: Repositories
+  spec_file: gitee-repositories-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.85
+  evidence: POST /user/repos createUserRepo 'Create a repository for the authenticated user'; 'List all
+    branches'; 'Create a branch'; "List a repository's commits"
+  reason: Repository, branch, tag and commit management is source-control practice, the core of Software
+    Construction Management.
+- tag: Issues
+  spec_file: gitee-issues-api-openapi.yml
+  capability_id: BC-4200
+  capability_id_l1: BC-4200
+  capability_name: Software Product Engineering Management
+  confidence: 0.7
+  evidence: GET /repos/{owner}/{repo}/issues listRepoIssues 'List all issues of a repository'; 'List all
+    task labels in a repository'; 'List all milestones in a repository'
+  reason: Issue tracking on a Git hosting/DevOps platform is software engineering work-item management
+    (defects and feature requests with labels/milestones). Sits under Software Product Engineering Management;
+    evidence does not clearly separate defect management (quality engineering) from backlog stewardship,
+    so no L2.
+- tag: Webhooks
+  spec_file: gitee-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: POST /repos/{owner}/{repo}/hooks createRepoHook 'Create a repository WebHook'; POST /repos/{owner}/{repo}/hooks/{id}/tests
+    testRepoHook 'Send a test delivery for a WebHook'
+  reason: Lifecycle of outbound webhook subscriptions with test delivery matches Webhook & Event Subscription
+    Management on the platform's developer ecosystem; moderate confidence since webhook config is also
+    generic plumbing.
