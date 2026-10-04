@@ -78,11 +78,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
     WebhookInput:
       type: object
       required:
@@ -109,13 +104,11 @@ components:
           created_at:
             type: string
             format: date-time
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
   parameters:
     Owner:
       name: owner
@@ -131,6 +124,13 @@ components:
       description: The repository path.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessTokenQuery:
       type: apiKey

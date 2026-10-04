@@ -81,11 +81,6 @@ paths:
                   $ref: '#/components/schemas/User'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
     Organization:
       type: object
       properties:
@@ -96,6 +91,11 @@ components:
         name:
           type: string
         url:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
           type: string
     User:
       type: object
@@ -113,14 +113,14 @@ components:
         type:
           type: string
   responses:
-    Unauthorized:
-      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
       content:
         application/json:
           schema:

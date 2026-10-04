@@ -77,25 +77,6 @@ components:
       properties:
         message:
           type: string
-    SshKeyInput:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-        title:
-          type: string
-    SshKey:
-      allOf:
-      - $ref: '#/components/schemas/SshKeyInput'
-      - type: object
-        properties:
-          id:
-            type: integer
-          created_at:
-            type: string
-            format: date-time
     User:
       type: object
       properties:
@@ -110,6 +91,25 @@ components:
         avatar_url:
           type: string
         type:
+          type: string
+    SshKey:
+      allOf:
+      - $ref: '#/components/schemas/SshKeyInput'
+      - type: object
+        properties:
+          id:
+            type: integer
+          created_at:
+            type: string
+            format: date-time
+    SshKeyInput:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+        title:
           type: string
   responses:
     Unauthorized:

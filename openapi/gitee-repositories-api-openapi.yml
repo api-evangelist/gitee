@@ -211,22 +211,20 @@ paths:
                   type: object
                   additionalProperties: true
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid access token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-    Branch:
-      type: object
-      properties:
-        name:
-          type: string
-        protected:
-          type: boolean
-        commit:
-          type: object
-          additionalProperties: true
     RepositoryInput:
       type: object
       required:
@@ -242,6 +240,36 @@ components:
           type: boolean
         has_wiki:
           type: boolean
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+        name:
+          type: string
+        html_url:
+          type: string
+        avatar_url:
+          type: string
+        type:
+          type: string
+    Branch:
+      type: object
+      properties:
+        name:
+          type: string
+        protected:
+          type: boolean
+        commit:
+          type: object
+          additionalProperties: true
     Repository:
       type: object
       properties:
@@ -267,21 +295,6 @@ components:
           type: integer
         forks_count:
           type: integer
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-        login:
-          type: string
-        name:
-          type: string
-        html_url:
-          type: string
-        avatar_url:
-          type: string
-        type:
-          type: string
   parameters:
     Owner:
       name: owner
@@ -297,19 +310,6 @@ components:
       description: The repository path.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     accessTokenQuery:
       type: apiKey
