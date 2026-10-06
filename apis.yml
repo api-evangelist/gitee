@@ -63,7 +63,7 @@ tags_raw:
 - China
 - Open-Source
 created: '2026-07-12'
-modified: '2026-07-12'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: gitee:gitee-enterprises-api
@@ -235,6 +235,8 @@ apis:
   - type: OpenCollection
     url: collections/gitee.opencollection.json
 common:
+- url: https://gitee.com/blog/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/gitee-capability-edges.yml
   name: Gitee Business Capability Map
