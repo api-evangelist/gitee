@@ -94,6 +94,11 @@ components:
           type: boolean
         merge_requests_events:
           type: boolean
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
     Webhook:
       allOf:
       - $ref: '#/components/schemas/WebhookInput'
@@ -104,24 +109,19 @@ components:
           created_at:
             type: string
             format: date-time
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
   parameters:
-    Owner:
-      name: owner
-      in: path
-      required: true
-      description: The repository owner (user or organization path).
-      schema:
-        type: string
     Repo:
       name: repo
       in: path
       required: true
       description: The repository path.
+      schema:
+        type: string
+    Owner:
+      name: owner
+      in: path
+      required: true
+      description: The repository owner (user or organization path).
       schema:
         type: string
   responses:

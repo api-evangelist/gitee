@@ -77,6 +77,16 @@ components:
       properties:
         message:
           type: string
+    SshKey:
+      allOf:
+      - $ref: '#/components/schemas/SshKeyInput'
+      - type: object
+        properties:
+          id:
+            type: integer
+          created_at:
+            type: string
+            format: date-time
     User:
       type: object
       properties:
@@ -92,16 +102,6 @@ components:
           type: string
         type:
           type: string
-    SshKey:
-      allOf:
-      - $ref: '#/components/schemas/SshKeyInput'
-      - type: object
-        properties:
-          id:
-            type: integer
-          created_at:
-            type: string
-            format: date-time
     SshKeyInput:
       type: object
       required:
