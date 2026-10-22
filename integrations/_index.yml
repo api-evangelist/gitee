@@ -72,3 +72,39 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: gitee-obsidian
+  label: Obsidian
+  partner: obsidian
+  partner_name: Obsidian
+  category: Obsidian community plugin
+  type: marketplace
+  marketplace: obsidian-community-plugins
+  channel: community-plugin
+  evidence: https://github.com/ericquan8/obsidian-gitee-sync
+  source: edge
+  relationship: connector-listing
+  contract_reference:
+    register: Obsidian community-plugins.json (obsidianmd/obsidian-releases@793b5211) + plugin repo README / manifest
+      / source
+    spec_file: null
+    role: obsidian-community-plugin:community
+    registered_name: eric
+    register_id: https://github.com/ericquan8/obsidian-gitee-sync
+    matched_domain: gitee.com
+    matched_by: domain+name-in-listing
+    matched_where: source
+    matched_host: gitee.com
+    builder: community
+    plugins:
+    - gitee-sync
+    - gitee-sync-plus
+    - gitee-sync-better
+    - ob-sync
+    downloads_context: 1868
+    signal_note: 'ONE edge per provider: a community plugin names the provider in its name/description AND carries
+      the provider''s domain or API host in its README or source. Builder is a named community author (not the provider).
+      Plugin and download counts are context, never counted.'
+    detected_by: sweep-obsidian-community-plugins.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
