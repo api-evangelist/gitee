@@ -30,6 +30,93 @@ edges:
     detected: '2026-10-21'
   detected_by: sweep-browser-extension-stores.py
   first_seen: '2026-10-21'
+- partner_name: Raycast
+  partner: raycast
+  partner_match: domain
+  partner_url: https://www.raycast.com
+  partner_domain: raycast.com
+  type: marketplace
+  marketplace: raycast-store
+  channel: connector-listing
+  relationship: connector-coverage
+  evidence: https://www.raycast.com/koinzhang/gitee
+  app: Gitee
+  category: Raycast Store extension (community wrapper)
+  listing_count: 1
+  contract_reference:
+    register: Raycast Store (raycast/extensions monorepo + store_listings JSON)
+    spec_file: null
+    role: raycast-community-wrapper
+    builder: community
+    authors:
+    - koinzhang
+    matched_domain: gitee.com
+    matched_by: domain
+    monorepo_commit: 84f9ac51336a8c69f70974a75bc067c0feae3658
+    listings:
+    - title: Gitee
+      store_url: https://www.raycast.com/koinzhang/gitee
+      installs: 200
+      categories:
+      - Developer Tools
+      - Web
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/gitee/
+      author: koinzhang
+    categories:
+    - Developer Tools
+    - Web
+    identity_note: the extension's own source calls a host on the product's domain AND its title / package name
+      passes partner_link's name check; built by Raycast community developers, not the vendor
+    signal_note: 'coverage: Raycast''s store reaches the product through community-built extensions; one edge per
+      (product, store); install / listing counts are context, never counted'
+    detected_by: sweep-raycast-store-extensions.py
+    detected: '2026-10-22'
+  detected_by: sweep-raycast-store-extensions.py
+  first_seen: '2026-10-22'
+  direction: partner-built
+- partner_name: Obsidian
+  partner: obsidian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: obsidian-community-plugins
+  channel: community-plugin
+  relationship: connector-listing
+  direction: third-party
+  evidence: https://github.com/ericquan8/obsidian-gitee-sync
+  app: Gitee Sync
+  listing_count: 4
+  category: Obsidian community plugin
+  partner_url: https://obsidian.md/plugins
+  contract_reference:
+    register: Obsidian community-plugins.json (obsidianmd/obsidian-releases@793b5211) + plugin repo README / manifest
+      / source
+    spec_file: null
+    role: obsidian-community-plugin:community
+    registered_name: eric
+    register_id: https://github.com/ericquan8/obsidian-gitee-sync
+    matched_domain: gitee.com
+    matched_by: domain+name-in-listing
+    matched_where: source
+    matched_host: gitee.com
+    builder: community
+    plugins:
+    - gitee-sync
+    - gitee-sync-plus
+    - gitee-sync-better
+    - ob-sync
+    downloads_context: 1868
+    signal_note: 'ONE edge per provider: a community plugin names the provider in its name/description AND carries
+      the provider''s domain or API host in its README or source. Builder is a named community author (not the provider).
+      Plugin and download counts are context, never counted.'
+    detected_by: sweep-obsidian-community-plugins.py
+    detected: '2026-10-22'
+  detected_by: sweep-obsidian-community-plugins.py
+  first_seen: '2026-10-22'
+  apps:
+  - Gitee Sync
+  - Gitee Sync Plus
+  - Gitee Sync Better
+  - SyncHub
 generated: '2026-10-21'
 method: searched
 source:
@@ -40,3 +127,9 @@ checked:
 - https://addons.mozilla.org/api/v5/addons/addon/<slug>/
 - https://addons.mozilla.org/api/v5/addons/search/?type=extension&app=firefox
 - https://chromewebstore.google.com/sitemap
+- https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions
+- https://www.raycast.com/api/v1/store_listings
+- https://raw.githubusercontent.com/<repo>/HEAD/README.md
+- https://raw.githubusercontent.com/<repo>/HEAD/manifest.json
+- https://raw.githubusercontent.com/obsidianmd/obsidian-releases/793b52114f54b055b760ef47761ec5c93d689804/community-plugin-stats.json
+- https://raw.githubusercontent.com/obsidianmd/obsidian-releases/793b52114f54b055b760ef47761ec5c93d689804/community-plugins.json
