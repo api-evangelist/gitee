@@ -1,4 +1,4 @@
-# Gitee (gitee)
+# Gitee
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,117 +64,142 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Gitee (码云) is a major China-based Git hosting and DevOps platform operated by OSChina / Shenzhen Oschina (开源中国). It provides code hosting, pull requests, issue tracking, gists, organizations, and enterprise DevOps workflows for millions of developers and repositories. Gitee exposes a documented REST API v5 covering repositories, issues, pull requests, users, organizations, gists, enterprises, webhooks, and search.
+Gitee (码云) is a major China-based Git hosting and DevOps platform operated by OSChina / Shenzhen Oschina (开源中国). It provides code hosting, pull requests, issue tracking, gists, organizations, and enterprise DevOps workflows for millions of developers and repositories. Gitee exposes a documented REST API v5 at https://gitee.com/api/v5 (live Swagger at https://gitee.com/api/v5/swagger) covering repositories, issues, pull requests, users, organizations, gists, enterprises, webhooks, and search. Requests authenticate with a personal access token (access_token query parameter or Authorization header) or via OAuth2. Gitee offers a free personal tier plus paid Enterprise editions.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/gitee/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/gitee/refs/heads/main/apis.yml)
+**Areas:** Code Hosting · Version Control · Git Hosting · Repositories · Pull Requests · Issue Tracking · DevOps · Open Source · China
 
-## Access Model (Honest Summary)
+## Gitee on APIs.io
 
-- **Real, live, documented API.** The Gitee Open API v5 is a REST API over HTTPS with base URL `https://gitee.com/api/v5` and a live Swagger 2.0 definition at [`https://gitee.com/api/v5/swagger`](https://gitee.com/api/v5/swagger) (machine-readable JSON at `https://gitee.com/api/v5/swagger_doc.json`, observed as Gitee Open API version 5.4.92 on 2026-07-12). The full spec declares **175 paths / 264 operations**.
-- **Verified live.** `GET https://gitee.com/api/v5/repos/oschina/git-osc` returned HTTP 200 with real repository JSON and an `X-RateLimit-Limit: 60` header; `GET /api/v5/emojis` returned HTTP 200.
-- **Authentication.** A **personal access token** sent as the `access_token` query parameter (present on 236 of 264 operations) or as an `Authorization: Bearer <token>` header, **or OAuth2** (authorize at `https://gitee.com/oauth/authorize`, token at `https://gitee.com/oauth/token`; scopes include `user_info`, `projects`, `pull_requests`, `issues`, `notes`, `keys`, `hook`, `groups`, `gists`, `enterprises`, `emails`). Public reads work unauthenticated at a lower rate limit.
-- **Pricing.** A **free personal tier** (public/private repos, pull requests, issues, gists, API access) plus **paid Gitee Enterprise Edition** (企业版) sold per seat per year in CNY across Free, Standard (标准版, from ~299 CNY/user/year with seat minimums), and Premium (尊享版) packages. The API itself carries no per-call fee - it is governed by rate limits.
-- **China-based platform.** Gitee is operated from mainland China (`gitee.com`), is ICP-registered, and serves Chinese-language documentation and responses. Expect cross-border latency and account for data-residency considerations if consuming from outside China.
-- **No WebSocket.** Gitee's public API is REST plus outbound repository **WebHooks** (HTTP callbacks). No WebSocket (`wss://`) or SSE endpoint is documented - see `review.yml`.
+Everything profiled for Gitee is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/gitee/](https://apis.io/providers/gitee/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (9)
 
-- Code Hosting
-- Git
-- Git Hosting
-- Version Control
-- Repositories
-- Pull Requests
-- Issue Tracking
-- DevOps
-- Open Source
-- China
+- [Gitee Enterprises API](https://apis.io/apis/gitee/gitee-enterprises-api/) — Gitee Enterprise Edition - enterprises, members, weekly reports.
+- [Gitee Gists API](https://apis.io/apis/gitee/gitee-gists-api/) — Code snippets (gists) and their comments.
+- [Gitee Issues API](https://apis.io/apis/gitee/gitee-issues-api/) — Issue tracking - issues, comments, labels, milestones.
+- [Gitee Organizations API](https://apis.io/apis/gitee/gitee-organizations-api/) — Organizations and their members.
+- [Gitee Pull Requests API](https://apis.io/apis/gitee/gitee-pull-requests-api/) — Pull requests - create, review, merge, and inspect changes.
+- [Gitee Repositories API](https://apis.io/apis/gitee/gitee-repositories-api/) — Repositories and their contents - branches, tags, commits, contents, forks.
+- [Gitee Search API](https://apis.io/apis/gitee/gitee-search-api/) — Search across repositories, issues, and users.
+- [Gitee Users API](https://apis.io/apis/gitee/gitee-users-api/) — The authenticated user, keys, followers, and following.
+- [Gitee Webhooks API](https://apis.io/apis/gitee/gitee-webhooks-api/) — Repository WebHooks (outbound HTTP event callbacks).
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-The catalog groups the Gitee v5 surface into seven APIs. All share base URL `https://gitee.com/api/v5`. The curated OpenAPI (`openapi/gitee-openapi.yml`) captures a representative subset (~30 operations) of the authoritative 264-operation spec.
+Model Context Protocol servers that expose the API to agents.
 
-### Gitee Repositories API
+- [gitee](https://apis.io/servers/gitee/gitee/)
 
-Create and manage repositories and their contents - branches, tags, commits, contents, forks, collaborators, branch protection, and file blobs and trees. The largest surface of the Gitee v5 API.
+#### Agentic access (1)
 
-- **Human URL:** [https://gitee.com/api/v5/swagger](https://gitee.com/api/v5/swagger)
-- **Base URL:** `https://gitee.com/api/v5`
-- **Tags:** Repositories, Code Hosting, Git
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Gitee Issues API
+- [Gitee Agentic Access](https://apis.io/agentic-access/gitee/gitee-agentic-access/)
 
-Track work with issues - list, create, and update issues for a repository or organization, manage issue comments, labels, and milestones, and inspect the pull requests linked to an issue.
+#### Collections (10)
 
-- **Human URL:** [https://gitee.com/api/v5/swagger](https://gitee.com/api/v5/swagger)
-- **Base URL:** `https://gitee.com/api/v5`
-- **Tags:** Issues, Issue Tracking, Labels
+Postman and Open Collection request collections.
 
-### Gitee Pull Requests API
+- [Gitee Open API v5 (core subset)](https://apis.io/collections/gitee/open-gitee/)
+- [Gitee Open API v5 (core subset) Enterprises API](https://apis.io/collections/gitee/open-gitee-enterprises-api/)
+- [Gitee Open API v5 (core subset) Enterprises Gists API](https://apis.io/collections/gitee/open-gitee-gists-api/)
+- [Gitee Open API v5 (core subset) Enterprises Issues API](https://apis.io/collections/gitee/open-gitee-issues-api/)
+- [Gitee Open API v5 (core subset) Enterprises Organizations API](https://apis.io/collections/gitee/open-gitee-organizations-api/)
+- [Gitee Open API v5 (core subset) Enterprises Pull Requests API](https://apis.io/collections/gitee/open-gitee-pull-requests-api/)
+- [Gitee Open API v5 (core subset) Enterprises Repositories API](https://apis.io/collections/gitee/open-gitee-repositories-api/)
+- [Gitee Open API v5 (core subset) Enterprises Search API](https://apis.io/collections/gitee/open-gitee-search-api/)
+- [Gitee Open API v5 (core subset) Enterprises Users API](https://apis.io/collections/gitee/open-gitee-users-api/)
+- [Gitee Open API v5 (core subset) Enterprises Webhooks API](https://apis.io/collections/gitee/open-gitee-webhooks-api/)
 
-Propose and review code changes - list, create, and update pull requests, read their commits and changed files, check merge status, merge or test a pull request, and assign reviewers and testers.
+#### Security (2)
 
-- **Human URL:** [https://gitee.com/api/v5/swagger](https://gitee.com/api/v5/swagger)
-- **Base URL:** `https://gitee.com/api/v5`
-- **Tags:** Pull Requests, Code Review, Merge
+Authentication, trust centre, and vulnerability disclosure.
 
-### Gitee Users and Organizations API
+- [Gitee Authentication](https://apis.io/security/gitee/gitee-authentication/)
+- [Gitee Domain Security](https://apis.io/security/gitee/gitee-domain-security/)
 
-Read and manage the authenticated user's profile, SSH public keys, namespaces, followers and following, plus organizations and their members and membership.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://gitee.com/api/v5/swagger](https://gitee.com/api/v5/swagger)
-- **Base URL:** `https://gitee.com/api/v5`
-- **Tags:** Users, Organizations, Members
+Published plans, tiers and prices.
 
-### Gitee Gists API
+- [Gitee Plans Pricing](https://apis.io/plans/gitee/gitee-plans-pricing/)
 
-Manage code snippets (gists) - list, create, read, update, and delete gists, star and unstar them, browse their commit history, and manage gist comments.
+#### Rate limits (1)
 
-- **Human URL:** [https://gitee.com/api/v5/swagger](https://gitee.com/api/v5/swagger)
-- **Base URL:** `https://gitee.com/api/v5`
-- **Tags:** Gists, Snippets, Code Sharing
+Published request limits.
 
-### Gitee Enterprises API
+- [Gitee Rate Limits](https://apis.io/rate-limits/gitee/gitee-rate-limits/)
 
-Enterprise DevOps surface for Gitee Enterprise Edition - list the authenticated user's enterprises, read an enterprise, manage enterprise members and invitations, and work with weekly reports and their comments.
+#### FinOps (1)
 
-- **Human URL:** [https://gitee.com/api/v5/swagger](https://gitee.com/api/v5/swagger)
-- **Base URL:** `https://gitee.com/api/v5`
-- **Tags:** Enterprises, DevOps, Teams
+What the API costs to run, by operation.
 
-### Gitee Webhooks API
+- [Gitee Finops](https://apis.io/finops/gitee/gitee-finops/)
 
-Configure repository WebHooks that Gitee posts events to over outbound HTTP - list, create, read, update, and delete a repository's webhooks and send a test delivery. These are server-to-endpoint HTTP callbacks, not a WebSocket API.
+## Where to find this API
 
-- **Human URL:** [https://gitee.com/api/v5/swagger](https://gitee.com/api/v5/swagger)
-- **Base URL:** `https://gitee.com/api/v5`
-- **Tags:** Webhooks, Events, Automation
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-## Properties
-
-- [OpenAPI](openapi/gitee-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/gitee.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/gitee.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Domain Security](security/gitee-domain-security.yml)
-- [Authentication](authentication/gitee-authentication.yml)
 - [Website](https://gitee.com)
 - [Documentation](https://gitee.com/api/v5/swagger)
-- [Sign Up](https://gitee.com/signup)
-- [OAuth](https://gitee.com/api/v5/oauth_doc)
-- [Plans](plans/gitee-plans-pricing.yml)
-- [Rate Limits](rate-limits/gitee-rate-limits.yml)
-- [Fin Ops](finops/gitee-finops.yml)
-- [LinkedIn](https://www.linkedin.com/company/gitee)
+- [Sign up](https://gitee.com/signup)
+- [Blog](https://gitee.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.7** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 44.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 14.5 |
+
+**Agent readiness 29.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/gitee/](https://apis.io/providers/gitee/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Gitee: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/gitee/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
